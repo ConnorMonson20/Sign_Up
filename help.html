@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee - MongoDB</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <script src="../index.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6 main">
+                <form action="/sign_up" method="POST">
+                    <h2>Add/Update Employee</h2>
+                    <input type="text" class="box" id="name" name="name" placeholder="Name" />
+                    <br>
+                    <input type="text" class="box" id="status" name="status" placeholder="Status" />
+                    <br>
+                    <input type="text" class="box" id="weeklyHours" name="weeklyHours" placeholder="Weekly Hours" />
+                    <br>
+                    <input type="text" class="box" id="salary" name="salary" placeholder="Salary" />
+                    <br>
+                    <input type="text" class="box" id="schedule" name="schedule" placeholder="Schedule" />
+                    <br>
+                    <button type="submit" onclick="userAction()" value="submit" id="submit">Submit</button>
+                    <br>
+                    <button type="payroll"  value="payroll" id="payroll">Payroll</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    <table border="5" id = "theTable" cellspacing="0" align="center">
+        <!--<caption>Timetable</caption>-->
+        <tr>
+            <td align="center" height="50"
+                width="100"><br>
+                <b>Day/Period</b></br>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>9:00-10:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>10:00-11:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>11:00-12:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>1:00-2:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>2:00-3:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>3:00-4:00</b>
+            </td>
+            <td align="center" height="50"
+                width="100">
+                <b>4:00-5:00</b>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Monday</b></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td rowspan="1" align="center" height="50">
+            </td>
+            <td colspan="1" align="center"
+                height="50"></td>
+            <td align="center" height="50"></td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Tuesday</b>
+            </td>
+            <td colspan="1" align="center"
+                height="50">
+            </td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Wednesday</b>
+            </td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td colspan="1" align="center"
+                height="50">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Thursday</b>
+            </td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td colspan="1" align="center"
+                height="50">
+            </td>
+            <td align="center" height="50"></td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Friday</b>
+            </td>
+            <td colspan="1" align="center"
+                height="50">
+            </td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+        </tr>
+        <tr>
+            <h1>
+            <td align="center" height="50">
+                <b>Saturday</b>
+            </td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td align="center" height="50"></td>
+            <td colspan="1" align="center"
+                height="50">
+            </td>
+            <td align="center" height="50"></td>
+            </h1>
+        </tr>
+    </table>
+    <script>
+        
+        db.collection('users').find().toArray(function(err, collection) {
+            
+        })
+        </script>
+        } }
+</body>
+
+</html>
